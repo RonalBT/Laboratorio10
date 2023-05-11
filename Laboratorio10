@@ -1,0 +1,37 @@
+
+# Import standard python modules
+import time
+import tkinter as tk
+import serial
+import threading
+import serial
+
+# Importar de la libería de adafruit.
+from Adafruit_IO import Client, Feed
+
+# variables para los contadores
+contador = 0 
+contador2=0
+
+# Link al usuario en adafruit
+
+ADAFRUIT_IO_USERNAME = "rabt2004"
+ADAFRUIT_IO_KEY = "aio_wslR70yrTKpnWMfFPrFURlfeb8BB"
+
+
+# datos para el envió de datos al feed del usuario.
+aio = Client(ADAFRUIT_IO_USERNAME, ADAFRUIT_IO_KEY)
+
+# Creación de los feeds a los que se enviará la data
+feed = Feed(name="laboratorio10") 
+feed = Feed(name="laboratorio10-2") 
+
+
+while True:
+    print('sending count: ', contador)
+    contador += 1  
+    contador2 +=5
+
+    aio.send_data('laboratorio10', contador) 
+    aio.send_data('laboratorio10-2', contador2)
+    time.sleep(3)
